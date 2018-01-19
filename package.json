@@ -6,18 +6,20 @@
     "start:dev": "NODE_ENV=development nodemon src/server.js",
     "start": "node src/server.js",
     "db:create": "createdb reached_development",
-    "db:load_schema": "psql reached_development < src/models/db/schema.sql"
+    "db:load_schema": "psql reached_development < src/models/db/schema.sql",
+    "db:session:setup": "psql reached_development < node_modules/connect-pg-simple/table.sql",
+    "db:reset": "dropdb reached_development && createdb reached_development && npm run db:load_schema && npm run db:session:setup"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/moniarchy/reach.git"
+    "url": "git+https://github.com/moniarchy/reached.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/moniarchy/reach/issues"
+    "url": "https://github.com/moniarchy/reached/issues"
   },
-  "homepage": "https://github.com/moniarchy/reach#readme",
+  "homepage": "https://github.com/moniarchy/reached#readme",
   "dependencies": {
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.1",
