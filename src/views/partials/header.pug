@@ -1,9 +1,8 @@
 nav.navbar
   a(href='/') 
-    img.logo(src='images/reached_logo.png', alt='Reached Logo')
+    img.logo(src='/images/reached_logo.png', alt='Reached Logo')
 
   if isLoggedIn
-    a(href='/users/profile') Profile
-    a(href="/logout") Logout
+    a.logout(href="/logout") Logout
   else
     a.login(href="/login") Login

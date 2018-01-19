@@ -27,4 +27,13 @@ router.get('/connectTwilio', (request, response) => {
   response.render('twilio');
 });
 
+router.get('/logout', (request, response) => {
+  request.session.destroy((error) => {
+    response.redirect('/');
+    if(error) {
+      renderError(request, response, error);
+    }
+  });
+});
+
 module.exports = router;

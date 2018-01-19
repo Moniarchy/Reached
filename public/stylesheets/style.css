@@ -64,7 +64,7 @@ a {
   text-decoration: none;
 }
 
-.login {
+.login, .logout {
   margin-top: 30px;
   font-size: 22px;
 }
@@ -93,4 +93,11 @@ a {
   background-color: #E22328;
   border: none;
   color: #fff;
+}
+
+.campaign-setup-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }

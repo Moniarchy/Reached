@@ -40,7 +40,7 @@ const addSid = (twilioAccountSID, id) => {
     console.error(error.message);
     throw error;
   });
-}
+};
 
 module.exports = {
   create,

@@ -8,6 +8,11 @@ const create = (firstName, lastName, email, password) => {
   });
 };
 
+const addSid = (twilioAccountSID, id) => {
+  return db.addSid(twilioAccountSID, id);
+};
+
 module.exports = {
-  create
+  create,
+  addSid
 };
