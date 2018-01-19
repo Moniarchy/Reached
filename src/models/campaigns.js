@@ -8,7 +8,12 @@ const addAutoResponse = (id, userId, autoResponse) => {
   return db.update(id, userId, autoResponse);
 };
 
+const getById = function(Id) {
+  return db.getById(Id);
+};
+
 module.exports = {
   create,
-  addAutoResponse
+  addAutoResponse,
+  getById
 };

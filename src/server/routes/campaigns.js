@@ -48,5 +48,18 @@ router.post('/:id/sms/auto', (request, response) => {
   });
 });
 
+router.get('/:id', (request, response) => {
+  const id = request.params.id;
+
+  Campaigns.getById(id)
+  .then(campaign => {
+    const campaignName = campaign.name;
+    const phoneNumber = campaign.phone_number;
+    response.render('campaign-info', {campaignName, phoneNumber});
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  });
+});
 
 module.exports = router;

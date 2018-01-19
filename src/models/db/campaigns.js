@@ -33,7 +33,19 @@ const addAutoResponse = (id, userId, autoResponse) => {
   });
 };
 
+const getById = (id) => {
+  return db.oneOrNone(`
+    SELECT * FROM campaigns
+    WHERE id = $1
+    `, id)
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   create,
-  addAutoResponse
+  addAutoResponse,
+  getById
 };
