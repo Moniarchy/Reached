@@ -5,7 +5,8 @@
   "scripts": {
     "start:dev": "NODE_ENV=development nodemon src/server.js",
     "start": "node src/server.js",
-    "db:create": "createdb reached_development"
+    "db:create": "createdb reached_development",
+    "db:load_schema": "psql reached_development < src/models/db/schema.sql"
   },
   "repository": {
     "type": "git",
