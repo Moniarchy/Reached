@@ -14,7 +14,7 @@ CREATE TABLE campaigns(
   id SERIAL PRIMARY KEY,
   name VARCHAR(150),
   organization_name VARCHAR(255),
-  phone_number INTEGER,
+  phone_number INTEGER DEFAULT 14159148171,
   auto_response VARCHAR(1000),
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
 );
