@@ -62,7 +62,7 @@ router.get('/:id', (request, response) => {
 });
 
 router.post('/sms/auto', (request, response) => {
-  const phoneNumber = request.body.To;
+  const phoneNumber = request.body.To.replace(/[^0-9]/, '');
   const msgFrom = request.body.From;
   const msgBody = request.body.Body;
 
