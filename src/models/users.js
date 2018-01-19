@@ -14,5 +14,6 @@ const addSid = (twilioAccountSID, id) => {
 
 module.exports = {
   create,
-  addSid
+  addSid,
+  getById: db.getById
 };

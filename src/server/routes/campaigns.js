@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Users = require('../../models/users');
+const Campaigns = require('../../models/campaigns');
 const { renderError } = require('../utils');
 
 router.get('/new', (request, response) => {
@@ -17,8 +18,48 @@ router.get('/new', (request, response) => {
 });
 
 router.post('/new', (request, response) => {
-  response.status(200).json('Account has been updated.');
-  //route to another GET. In the meanwhile, respond with json
+  const userId = request.session.user.id;
+  const name = request.body.campaign_name;
+  const organizationName = request.body.organization_name;
+
+  Campaigns.create(userId, name, organizationName)
+  .then(campaign => {
+    response.redirect(`/${campaign.id}/sms/auto/`);
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  });
+});
+
+router.get('/:id/sms/auto', (request, response) => {
+  const id = request.params.id;
+  response.render('sms/auto', id);
+});
+
+router.post('/:id/sms/auto', (request, response) => {
+  const id = request.params.id;
+  const userId = request.session.user.id;
+  const autoResponse = request.body.sms_auto;
+
+  Campaigns.addAutoResponse(id, userId, autoResponse)
+  .then(response.redirect(`campaigns/${id}`))
+  .catch(error => {
+    renderError(request, response, error);
+  });
+});
+
+router.get('/:id', (request, response) => {
+  const id = request.params.id;
+
+  Campaigns.getById(id)
+  .then(campaign => {
+    const campaignName = campaign.name;
+    const phoneNumber = campaign.phone_number;
+    response.render('campaign-info', {campaignName, phoneNumber});
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  });
 });
 
 module.exports = router;

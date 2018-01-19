@@ -42,7 +42,23 @@ const addSid = (twilioAccountSID, id) => {
   });
 };
 
+const getById = (id) => {
+  return db.one(`
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = $1
+  `, id)
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   create,
-  addSid
+  addSid,
+  getById
 };
