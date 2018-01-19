@@ -61,4 +61,18 @@ router.get('/:id', (request, response) => {
   });
 });
 
+router.post('sms/auto', (request, response) => {
+  console.log('request.body::::', request.body);
+  var msgFrom = request.body.From;
+  var msgBody = request.body.Body;
+
+  response.send(`
+    <Response>
+      <Message>
+        Hello ${msgFrom}! You said: ${msgBody}
+      </Message>
+    </Response>
+  `);
+});
+
 module.exports = router;
