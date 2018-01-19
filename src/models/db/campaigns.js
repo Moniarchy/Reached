@@ -33,8 +33,8 @@ const addAutoResponse = (id, userId, autoResponse) => {
   });
 };
 
-const getById = (id) => {
-  return db.oneOrNone(`
+const getById = id => {
+  return db.one(`
     SELECT * FROM campaigns
     WHERE id = $1
     `, id)
@@ -44,8 +44,20 @@ const getById = (id) => {
   });
 };
 
+const getByPhoneNumber = phoneNumber => {
+  return db.one(`
+    SELECT * FROM campaigns
+    WHERE phone_number = $1
+    `, phoneNumber)
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   create,
   addAutoResponse,
-  getById
+  getById,
+  getByPhoneNumber
 };

@@ -62,17 +62,24 @@ router.get('/:id', (request, response) => {
 });
 
 router.post('/sms/auto', (request, response) => {
-  console.log('request.body::::', request.body);
-  var msgFrom = request.body.From;
-  var msgBody = request.body.Body;
+  const phoneNumber = request.body.To;
+  const msgFrom = request.body.From;
+  const msgBody = request.body.Body;
 
-  response.send(`
-    <Response>
-      <Message>
-        Hello ${msgFrom}! You said: ${msgBody}
-      </Message>
-    </Response>
-  `);
+  Campaigns.getByPhoneNumber(phoneNumber)
+  .then(campaign => {
+    response.send(`
+      <Response>
+        <Message>
+          Hello ${msgFrom}!
+          ${campaign.auto_response}
+        </Message>
+      </Response>
+    `);
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  });
 });
 
 module.exports = router;
