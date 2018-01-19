@@ -61,7 +61,7 @@ router.get('/:id', (request, response) => {
   });
 });
 
-router.post('sms/auto', (request, response) => {
+router.post('/sms/auto', (request, response) => {
   console.log('request.body::::', request.body);
   var msgFrom = request.body.From;
   var msgBody = request.body.Body;
