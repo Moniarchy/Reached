@@ -21,7 +21,7 @@ const create = (userId, name, organizationName) => {
 };
 
 const addAutoResponse = (id, userId, autoResponse) => {
-  return db.one(`
+  return db.none(`
     UPDATE campaigns
     SET user_id=$2, auto_response=$3
     WHERE id=$1

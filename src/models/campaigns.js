@@ -5,7 +5,7 @@ const create = (userId, name, organizationName) => {
 };
 
 const addAutoResponse = (id, userId, autoResponse) => {
-  return db.update(id, userId, autoResponse);
+  return db.addAutoResponse(id, userId, autoResponse);
 };
 
 const getById = function(Id) {

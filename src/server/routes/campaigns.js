@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require('express').Router( { mergeParams: true } );
 const Users = require('../../models/users');
 const Campaigns = require('../../models/campaigns');
 const { renderError } = require('../utils');
@@ -9,7 +9,6 @@ router.get('/new', (request, response) => {
 
   Users.addSid(twilioAccountSID, id)
   .then(user => {
-    console.log('updated user:::', user);
     response.render('campaigns/new');
   })
   .catch(error => {
@@ -24,7 +23,7 @@ router.post('/new', (request, response) => {
 
   Campaigns.create(userId, name, organizationName)
   .then(campaign => {
-    response.redirect(`/${campaign.id}/sms/auto/`);
+    response.redirect(`/campaigns/${campaign.id}/sms/auto`);
   })
   .catch(error => {
     renderError(request, response, error);
@@ -33,7 +32,7 @@ router.post('/new', (request, response) => {
 
 router.get('/:id/sms/auto', (request, response) => {
   const id = request.params.id;
-  response.render('sms/auto', id);
+  response.render('sms/auto', {id});
 });
 
 router.post('/:id/sms/auto', (request, response) => {
@@ -42,7 +41,7 @@ router.post('/:id/sms/auto', (request, response) => {
   const autoResponse = request.body.sms_auto;
 
   Campaigns.addAutoResponse(id, userId, autoResponse)
-  .then(response.redirect(`campaigns/${id}`))
+  .then(response.redirect(`/campaigns/${id}`))
   .catch(error => {
     renderError(request, response, error);
   });
@@ -55,7 +54,7 @@ router.get('/:id', (request, response) => {
   .then(campaign => {
     const campaignName = campaign.name;
     const phoneNumber = campaign.phone_number;
-    response.render('campaign-info', {campaignName, phoneNumber});
+    response.render('campaigns/campaign-info', {campaignName, phoneNumber});
   })
   .catch(error => {
     renderError(request, response, error);
