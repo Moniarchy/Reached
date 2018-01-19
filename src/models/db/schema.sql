@@ -3,7 +3,7 @@ CREATE TABLE users(
   id SERIAL PRIMARY KEY,
   first_name VARCHAR(50),
   last_name VARCHAR(75),
-  email VARCHAR(100),
+  email VARCHAR(100) UNIQUE,
   password VARCHAR(255),
   twilio_account_sid VARCHAR(255),
   twilio_authToken VARCHAR(255)
