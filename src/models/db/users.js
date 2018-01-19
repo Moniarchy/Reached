@@ -21,6 +21,28 @@ const create = (firstName, lastName, email, password) => {
   });
 };
 
+const addSid = (twilioAccountSID, id) => {
+  return db.one(`
+    UPDATE
+      users
+    SET
+      twilio_account_sid = $1
+    WHERE
+      id = $2
+    RETURNING
+      *
+  `,
+  [
+    twilioAccountSID,
+    id
+  ])
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+}
+
 module.exports = {
-  create
+  create,
+  addSid
 };
