@@ -18,8 +18,8 @@ router.post('/signup', (request, response) => {
      });
    })
    .catch(error => {
-     request.flash('error', 'That username already exists. Please choose another.');
-     response.redirect('/signup');
+     request.flash('error', 'That email already exists.');
+     response.redirect('/');
    });
 });
 
