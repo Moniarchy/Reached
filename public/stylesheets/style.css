@@ -21,7 +21,7 @@ a {
   color: #333333;
 }
 
-.signup-form {
+.signup-form, .sms-auto-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,7 +32,7 @@ a {
   color: #B7BFC9;
 }
 
-.signup-form input, button {
+input, button {
   margin-bottom: 4%;
   width: 500px;
   height: 37px;
@@ -42,7 +42,7 @@ a {
   padding-left: 10px;
 }
 
-.signup-form button {
+button {
   background-color: #B02419;
   color: #fff;
   height: 45px;
@@ -82,7 +82,7 @@ a {
   text-align: center;
 }
 
-.twilio-setup-page {
+.twilio-setup-page, .campaign-setup-page, .sms-auto-page, .campaign-info-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -95,9 +95,66 @@ a {
   color: #fff;
 }
 
-.campaign-setup-page {
+.sms-auto-form {
+  margin-top: 100px;
+}
+
+.sms-auto-textarea {
+  margin-bottom: 4%;
+  width: 471px;
+  border: solid 1px #96A0AD;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 20px;
+  height: 150px;
+  resize: none;
+}
+
+.campaign-info-page {
+  text-align: center;
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding-top: 10px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-container {
+  padding: 20px;
+  padding: 60px 16px;
+  height: 162px;
+  color: #333333;
+  background-color: #fff;
+}
+
+.campaign-info-number {
+  background-color: #B02419;
+  color: #fff;
+  padding-top: 10px;
+  line-height: 18px;
+}
+
+.campaign-info-title {
+  font-size: 42px;
+  color: #333333;
+}
+
+.your-campaign-text {
+  font-weight: 300;
+}
+
+.phone-number {
+  font-size: 32px;
+}
+
+.share-number-text {
+  font-weight: 300;
+  font-size: 32px;
 }

@@ -3,6 +3,6 @@ extends /partials/layout
 block content
   div.sms-auto-page
     form.sms-auto-form(action=`/campaigns/${id}/sms/auto`, method="POST")
-      input(type="text", name="sms_auto", maxlength="2000", placeholder="SMS Auto-response" required)
+      textarea.sms-auto-textarea(type="text", name="sms_auto", maxlength="1600", placeholder="SMS Auto-response" required)
       button(type='submit')
         | Create Initial Message
