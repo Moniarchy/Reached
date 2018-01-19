@@ -20,6 +20,20 @@ const create = (userId, name, organizationName) => {
   });
 };
 
+const addAutoResponse = (id, userId, autoResponse) => {
+  return db.one(`
+    UPDATE campaigns
+    SET user_id=$2, auto_response=$3
+    WHERE id=$1
+    `,
+    [id, userId, autoResponse])
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
-  create
+  create,
+  addAutoResponse
 };

@@ -23,14 +23,30 @@ router.post('/new', (request, response) => {
   const organizationName = request.body.organization_name;
 
   Campaigns.create(userId, name, organizationName)
-  .then(response.redirect('/sms/auto'))
+  .then(campaign => {
+    response.redirect(`/${campaign.id}/sms/auto/`);
+  })
   .catch(error => {
     renderError(request, response, error);
   });
 });
 
-router.get('/sms/auto', (request, response) => {
-  response.render('sms/auto');
+router.get('/:id/sms/auto', (request, response) => {
+  const id = request.params.id;
+  response.render('sms/auto', id);
 });
+
+router.post('/:id/sms/auto', (request, response) => {
+  const id = request.params.id;
+  const userId = request.session.user.id;
+  const autoResponse = request.body.sms_auto;
+
+  Campaigns.addAutoResponse(id, userId, autoResponse)
+  .then(response.redirect(`campaigns/${id}`))
+  .catch(error => {
+    renderError(request, response, error);
+  });
+});
+
 
 module.exports = router;
