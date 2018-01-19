@@ -1,8 +1,19 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
+const authentication = require('./authentication');
 
-router.get('/', function(request, response) {
-response.render('index')
-})
+// router.use(setDefaultReponseLocals);
 
-module.exports = router
+router.get('/', (request, response) => {
+  if(request.session.user) {
+    const id = request.session.user.id;
+    response.redirect(`/users/${id}`);
+  } else {
+    response.render('index');
+  }
+});
+
+
+router.use('/', authentication);
+// router.use(isLoggedIn);
+
+module.exports = router;
