@@ -4,9 +4,13 @@ const { renderError } = require('../utils');
 
 router.get('/new', (request, response) => {
   const twilioAccountSID = request.query.AccountSid;
+  const id = request.session.user.id;
 
-  Users.addSid(twilioAccountSID)
-  .then(response.render('campaigns/new'))
+  Users.addSid(twilioAccountSID, id)
+  .then(user => {
+    console.log('updated user:::', user);
+    response.render('campaigns/new');
+  })
   .catch(error => {
     renderError(request, response, error);
   });
