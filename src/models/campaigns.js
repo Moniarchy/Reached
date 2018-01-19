@@ -8,12 +8,17 @@ const addAutoResponse = (id, userId, autoResponse) => {
   return db.addAutoResponse(id, userId, autoResponse);
 };
 
-const getById = function(Id) {
-  return db.getById(Id);
+const getById = id => {
+  return db.getById(id);
+};
+
+const getByPhoneNumber = phoneNumber => {
+  return db.getByPhoneNumber(phoneNumber);
 };
 
 module.exports = {
   create,
   addAutoResponse,
-  getById
+  getById,
+  getByPhoneNumber
 };
