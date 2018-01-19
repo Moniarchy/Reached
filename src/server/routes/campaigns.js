@@ -5,16 +5,16 @@ const { renderError } = require('../utils');
 router.get('/new', (request, response) => {
   const twilioAccountSID = request.query.AccountSid;
 
-  addSidToUser(twilioAccountSID)
-  .then(response.render('campaign/new'))
+  Users.addSid(twilioAccountSID)
+  .then(response.render('campaigns/new'))
   .catch(error => {
-    renderError(request, response, error)
+    renderError(request, response, error);
   });
 });
 
 router.post('/new', (request, response) => {
-  response.status(200).json('Account has been updated.'))
+  response.status(200).json('Account has been updated.');
   //route to another GET. In the meanwhile, respond with json
-})
+});
 
 module.exports = router;
