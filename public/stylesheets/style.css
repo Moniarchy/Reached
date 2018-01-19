@@ -1,10 +1,11 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  background-color: #F1F2F6;
+  margin: 0;
 }
 
 a {
-  color: #00B7FF;
+  color: #ff1200;
 }
 
 .signup-page {
@@ -17,6 +18,7 @@ a {
 .create-title {
   margin-bottom: 60px;
   font-size: 42px;
+  color: #333333;
 }
 
 .signup-form {
@@ -27,19 +29,68 @@ a {
 }
 
 .signup-form input::placeholder {
-  padding-left: 10px;
+  color: #B7BFC9;
 }
 
 .signup-form input, button {
   margin-bottom: 4%;
   width: 500px;
-  height: 30px;
-  border: solid 1px gray;
-  border-radius: 3px;
+  height: 37px;
+  border: solid 1px #96A0AD;
+  border-radius: 5px;
   font-size: 16px;
+  padding-left: 10px;
 }
 
 .signup-form button {
-  background-color: #00B7FF;
+  background-color: #B02419;
+  color: #fff;
+  height: 45px;
+  border: none !important;
+  width: 512px;
+  margin-top: 3px;
+}
+
+.navbar {
+  display: flex;
+  flex: 0;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.navbar a {
+  text-decoration: none;
+}
+
+.login {
+  margin-top: 30px;
+  font-size: 22px;
+}
+
+.logo {
+  height: 80px;
+  margin-right: 1000px;
+}
+
+.errors {
+  color: red;
+  font-size: 2rem;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.twilio-setup-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.connect-twilio-btn {
+  background-color: #E22328;
+  border: none;
   color: #fff;
 }

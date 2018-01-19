@@ -3,5 +3,9 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='https://fonts.googleapis.com/css?family=Roboto:300,400', rel='stylesheet')
+
   body
+    include header.pug
+    h3.errors #{warning}
     block content
