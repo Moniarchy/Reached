@@ -6,3 +6,40 @@ body {
 a {
   color: #00B7FF;
 }
+
+.signup-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.create-title {
+  margin-bottom: 60px;
+  font-size: 42px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-form input::placeholder {
+  padding-left: 10px;
+}
+
+.signup-form input, button {
+  margin-bottom: 4%;
+  width: 500px;
+  height: 30px;
+  border: solid 1px gray;
+  border-radius: 3px;
+  font-size: 16px;
+}
+
+.signup-form button {
+  background-color: #00B7FF;
+  color: #fff;
+}

@@ -1,0 +1,17 @@
+extends /partials/layout
+
+block content
+  div.signup-page
+    h1.create-title Create Your Account
+  
+    div
+      form.signup-form(action='/signup', method="POST")
+        input(type="first_name", name="first_name", maxlength="20", placeholder="First Name" required)
+        input(type="last_name", name="last_name", maxlength="20", placeholder="Last Name" required)
+        input(type="email", name="email", maxlength="30", placeholder="Email" required)
+        input(type="password", name="password", maxlength="20", placeholder="Password")
+        button(type='submit')
+          | Signup
+    br
+    br
+    a(href="/login") Login
