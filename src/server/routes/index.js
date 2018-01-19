@@ -14,6 +14,7 @@ router.get('/', (request, response) => {
 
 
 router.use('/', authentication);
+// router.use('/campaigns', campaigns);
 // router.use(isLoggedIn);
 
 module.exports = router;
