@@ -3,7 +3,7 @@
 A platform that uses the Twilio API and allows organizations to engage with a mass amount of followers via SMS messages.
 
 
-![Reached_screenshot](public/images/Reached_screenshot.png)
+![Reached_Screenshot](public/images/Reached_Screenshot.png)
 
 [Link to Live Site](https://reached.herokuapp.com/)
 
