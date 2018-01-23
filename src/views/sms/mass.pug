@@ -5,7 +5,11 @@ block content
     h1.campaign-info-title Send a Mass Message
 
     div.card
-      div
+      div.campaign-mass-info-number
         h3.campaign-name Campaign Name
       div.card-container
-        textarea.sms-mass-textarea(name="sms_mass", maxlength="1600", placeholder="Type your message here.", required)
+        form.sms-mass-form(action=`/#`, method="POST")
+          textarea.sms-mass-textarea(name="sms_mass", maxlength="1600", placeholder="Type your message here.", required)
+          button(type="submit" class="send-mass-sms")
+            i(class="fa fa-bullhorn" aria-hidden="true")
+            |  SEND MASS SMS

@@ -127,9 +127,8 @@ button {
 }
 
 .card-container {
-  padding: 20px;
   padding: 60px 16px;
-  height: 162px;
+  height: 230px;
   color: #333333;
   background-color: #fff;
 }
@@ -168,4 +167,22 @@ button {
 .fa-bullhorn {
   font-size: 23px !important;
   margin-right: 23px !important;
+}
+
+.sms-mass-textarea {
+  border: solid 1px #96A0AD;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 100px;
+  margin-bottom: 4%;
+  padding: 20px;
+  resize: none;
+  width: 471px;
+}
+
+.campaign-mass-info-number {
+  background-color: #B02419;
+  color: #fff;
+  line-height: 18px;
+  padding-top: 10px;
 }
