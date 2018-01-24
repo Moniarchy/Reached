@@ -2,6 +2,7 @@ const router = require('express').Router( { mergeParams: true } );
 const Users = require('../../models/users');
 const Campaigns = require('../../models/campaigns');
 const { renderError } = require('../utils');
+const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN)/*(get a user's SID from the database, get a user's token from the database)*/
 
 router.get('/new', (request, response) => {
   const twilioAccountSID = request.query.AccountSid;
@@ -81,5 +82,25 @@ router.post('/sms/auto', (request, response) => {
     renderError(request, response, error);
   });
 });
+
+router.post('/sms/mass', (request, response) => {
+  const message = request.body.sms_mass
+  const recipients = ['+13233650546', '+15105075034']
+
+    recipients.forEach(recipient => {
+      twilio.messages.create({
+        to: recipient,
+        from: '14159148171',
+        body: message
+      })
+      .then(result => {
+        console.log(result.sid)
+      })
+      .catch(error => {
+        renderError(request, response, error);
+      })
+    })
+  response.status(200).send('Success!')
+})
 
 module.exports = router;
