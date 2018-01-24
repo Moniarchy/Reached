@@ -1,0 +1,19 @@
+extends /partials/layout
+
+block content
+
+  div.campaign-success-page
+    h1.campaign-info-title.success-title Send a Mass Message
+
+    div.card.success-card
+      i(class="fa fa-bullhorn success-bullhorn" aria-hidden="true")
+      br
+      h1 Success!
+      br
+      p.success-paragraph
+        | Message sent to
+        strong #{numberOfRecipients}
+        | members of the
+        br
+        strong #{campaignName}
+        | campaign!

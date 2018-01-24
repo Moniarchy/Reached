@@ -3,6 +3,10 @@ nav.navbar
     img.logo(src='/images/reached_logo.png', alt='Reached Logo')
 
   if isLoggedIn
+    a(href="/campaigns/sms/mass")
+      button(type="button" class="send-mass-sms")
+        i(class="fa fa-bullhorn" aria-hidden="true")
+        |  SEND MASS SMS
     a.logout(href="/logout") Logout
   else
     a.login(href="/login") Login

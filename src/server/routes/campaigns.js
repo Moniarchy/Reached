@@ -1,7 +1,9 @@
 const router = require('express').Router( { mergeParams: true } );
 const Users = require('../../models/users');
 const Campaigns = require('../../models/campaigns');
+const Recipients = require('../../models/recipients');
 const { renderError } = require('../utils');
+const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN)/*(get a user's SID from the database, get a user's token from the database)*/
 
 router.get('/new', (request, response) => {
   const twilioAccountSID = request.query.AccountSid;
@@ -63,15 +65,18 @@ router.get('/:id', (request, response) => {
 
 router.post('/sms/auto', (request, response) => {
   const phoneNumber = request.body.To.replace(/[^0-9]/, '');
-  const msgFrom = request.body.From;
+  const incomingNumber = request.body.From;
   const msgBody = request.body.Body;
 
   Campaigns.getByPhoneNumber(phoneNumber)
   .then(campaign => {
+    Recipients.create(incomingNumber, campaign.id)
+  })
+  .then(campaign => {
     response.send(`
       <Response>
         <Message>
-          Hello ${msgFrom}!
+          Hello ${incomingNumber}!
           ${campaign.auto_response}
         </Message>
       </Response>
@@ -81,5 +86,53 @@ router.post('/sms/auto', (request, response) => {
     renderError(request, response, error);
   });
 });
+
+router.get('/sms/mass', (request, response) => {
+  const userId = request.session.user.id
+
+  Campaigns.getByUserId(userId)
+  .then(campaign => {
+    response.render('sms/mass', {campaign})
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  })
+})
+
+router.post('/:id/sms/mass', (request, response) => {
+  const message = request.body.sms_mass
+  const campaignId = request.params.id
+
+  Recipients.getHellaInfoByCampaignId(campaignId)
+  .then(info => {
+    info.forEach(recipient => {
+      twilio.messages.create({
+        to: recipient.recipientnumber,
+        from: recipient.campaignnumber,
+        body: message
+      })
+    })
+  })
+  .then(result => {
+    response.redirect(`/campaigns/${campaignId}/sms/mass/success`)
+  })
+  .catch(error => {
+    renderError(request, response, error)
+  })
+})
+
+router.get('/:id/sms/mass/success', (request, response) => {
+  const campaignId = request.params.id
+
+  Recipients.getHellaInfoByCampaignId(campaignId)
+  .then(recipients => {
+    const numberOfRecipients = recipients.length
+    const campaignName = recipients[0].campaignname
+    response.render('sms/success', {numberOfRecipients, campaignName})
+  })
+  .catch(error => {
+    renderError(request, response, error)
+  })
+})
 
 module.exports = router;
