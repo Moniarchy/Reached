@@ -8,7 +8,12 @@ const getAll = () => {
   return db.getAll()
 }
 
+const getHellaInfoByCampaignId = (campaignId) => {
+  return db.getHellaInfoByCampaignId(campaignId)
+}
+
 module.exports = {
   create,
-  getAll
+  getAll,
+  getHellaInfoByCampaignId
  }

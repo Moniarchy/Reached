@@ -55,9 +55,21 @@ const getByPhoneNumber = phoneNumber => {
   });
 };
 
+const getByUserId = userId => {
+  return db.one(`
+    SELECT * FROM campaigns
+    WHERE user_id = $1
+    `, userId)
+  .catch(error => {
+    console.error(error.message);
+    throw error;
+  });
+};
+
 module.exports = {
   create,
   addAutoResponse,
   getById,
-  getByPhoneNumber
+  getByPhoneNumber,
+  getByUserId
 };
