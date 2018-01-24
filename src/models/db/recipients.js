@@ -33,7 +33,7 @@ const getAll = () => {
 
 const getHellaInfoByCampaignId = campaignId => {
   return db.many(`
-    SELECT recipients.phone_number AS recipientNumber, campaigns.phone_number AS campaignNumber FROM recipients
+    SELECT recipients.phone_number AS recipientNumber, campaigns.phone_number AS campaignNumber, campaigns.name AS campaignName FROM recipients
     JOIN campaigns
     ON recipients.campaign_id = campaigns.id
     WHERE recipients.campaign_id = $1
