@@ -82,7 +82,7 @@ button {
   text-align: center;
 }
 
-.twilio-setup-page, .campaign-setup-page, .sms-auto-page, .campaign-info-page {
+.twilio-setup-page, .campaign-setup-page, .sms-auto-page, .campaign-info-page, .campaign-success-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -133,7 +133,7 @@ button {
   background-color: #fff;
 }
 
-.campaign-info-number {
+.campaign-info-number, .success-card {
   background-color: #B02419;
   color: #fff;
   padding-top: 10px;
@@ -185,4 +185,24 @@ button {
   color: #fff;
   line-height: 18px;
   padding-top: 10px;
+}
+
+.success-card {
+height: 500px;
+text-align: center;
+}
+
+.success-bullhorn {
+  font-size: 100px !important;
+  margin-top: 70px;
+}
+
+.success-paragraph {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 35px;
+}
+
+.success-title {
+  margin: 60px;
 }

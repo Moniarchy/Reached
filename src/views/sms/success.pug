@@ -3,9 +3,17 @@ extends /partials/layout
 block content
 
   div.campaign-success-page
-    h1.campaign-info-title Send a Mass Message
+    h1.campaign-info-title.success-title Send a Mass Message
 
-    div.card
-      i(class="fa fa-bullhorn fa-5x" aria-hidden="true")
+    div.card.success-card
+      i(class="fa fa-bullhorn success-bullhorn" aria-hidden="true")
+      br
       h1 Success!
-      p Message sent to #{numberOfRecipients} members of the #{campaignName} campaign!
+      br
+      p.success-paragraph
+        | Message sent to
+        strong #{numberOfRecipients}
+        | members of the
+        br
+        strong #{campaignName}
+        | campaign!
