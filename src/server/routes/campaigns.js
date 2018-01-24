@@ -1,6 +1,7 @@
 const router = require('express').Router( { mergeParams: true } );
 const Users = require('../../models/users');
 const Campaigns = require('../../models/campaigns');
+const Recipients = require('../../models/recipients');
 const { renderError } = require('../utils');
 const twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN)/*(get a user's SID from the database, get a user's token from the database)*/
 
@@ -64,15 +65,18 @@ router.get('/:id', (request, response) => {
 
 router.post('/sms/auto', (request, response) => {
   const phoneNumber = request.body.To.replace(/[^0-9]/, '');
-  const msgFrom = request.body.From;
+  const incomingNumber = request.body.From;
   const msgBody = request.body.Body;
 
   Campaigns.getByPhoneNumber(phoneNumber)
   .then(campaign => {
+    Recipients.create(incomingNumber, campaign.id)
+  })
+  .then(campaign => {
     response.send(`
       <Response>
         <Message>
-          Hello ${msgFrom}!
+          Hello ${incomingNumber}!
           ${campaign.auto_response}
         </Message>
       </Response>
@@ -85,22 +89,30 @@ router.post('/sms/auto', (request, response) => {
 
 router.post('/sms/mass', (request, response) => {
   const message = request.body.sms_mass
-  const recipients = ['+13233650546', '+15105075034']
+  let campaignPhoneNumber;
 
-    recipients.forEach(recipient => {
-      twilio.messages.create({
-        to: recipient,
-        from: '14159148171',
-        body: message
-      })
-      .then(result => {
-        console.log(result.sid)
-      })
-      .catch(error => {
-        renderError(request, response, error);
-      })
+  Recipients.getAll()
+  .then(recipients => {
+    Campaigns.getById(recipients[0].campaign_id)
+    .then(campaign => {
+      console.log('campaign', campaign.phone_number)
     })
-  response.status(200).send('Success!')
+  recipients.forEach(recipient => {
+    console.log('campaignPhoneNumber', campaignPhoneNumber) //empty right now
+    twilio.messages.create({
+      to: recipient.phone_number,
+      from: campaignPhoneNumber,
+      body: message
+    })
+    .then(result => {
+      console.log(result.sid)
+    })
+  })
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  })
+  response.send('Success!')
 })
 
 module.exports = router;
