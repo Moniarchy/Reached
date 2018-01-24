@@ -11,7 +11,7 @@ router.get('/', (request, response) => {
     const id = request.session.user.id;
     response.redirect('`users/${id}`');
   } else {
-    response.render('sms/mass', {warning: request.flash('error')});
+    response.render('index', {warning: request.flash('error')});
   }
 });
 

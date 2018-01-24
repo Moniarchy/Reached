@@ -87,32 +87,38 @@ router.post('/sms/auto', (request, response) => {
   });
 });
 
-router.post('/sms/mass', (request, response) => {
-  const message = request.body.sms_mass
-  let campaignPhoneNumber;
+router.get('/sms/mass', (request, response) => {
+  const userId = request.session.user.id
 
-  Recipients.getAll()
-  .then(recipients => {
-    Campaigns.getById(recipients[0].campaign_id)
-    .then(campaign => {
-      console.log('campaign', campaign.phone_number)
-    })
-  recipients.forEach(recipient => {
-    console.log('campaignPhoneNumber', campaignPhoneNumber) //empty right now
-    twilio.messages.create({
-      to: recipient.phone_number,
-      from: campaignPhoneNumber,
-      body: message
-    })
-    .then(result => {
-      console.log(result.sid)
-    })
-  })
+  Campaigns.getByUserId(userId)
+  .then(campaign => {
+    response.render('sms/mass', {campaign})
   })
   .catch(error => {
     renderError(request, response, error);
   })
-  response.send('Success!')
+})
+
+router.post('/:id/sms/mass', (request, response) => {
+  const message = request.body.sms_mass
+  const campaignId = request.params.id
+
+  Recipients.getHellaInfoByCampaignId(campaignId)
+  .then(info => {
+    info.forEach(recipient => {
+      twilio.messages.create({
+        to: recipient.recipientnumber,
+        from: recipient.campaignnumber,
+        body: message
+      })
+    })
+  })
+  .then(result => {
+    response.end()
+  })
+  .catch(error => {
+    renderError(request, response, error);
+  })
 })
 
 module.exports = router;
