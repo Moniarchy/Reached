@@ -114,10 +114,23 @@ router.post('/:id/sms/mass', (request, response) => {
     })
   })
   .then(result => {
-    response.end()
+    response.redirect(`/campaigns/${campaign.id}/sms/mass/success`)
   })
   .catch(error => {
-    renderError(request, response, error);
+    renderError(request, response, error)
+  })
+})
+
+router.get('/:id/sms/mass/success', (request, response) => {
+  const campaignId = request.params.id
+
+  Recipients.getHellaInfoByCampaignId(campaignId)
+  .then(recipients => {
+    const numberOfRecipients = recipients.length
+    response.render('/sms/success', {numberOfRecipients})
+  })
+  .catch(error => {
+    renderError(request, response, error)
   })
 })
 
