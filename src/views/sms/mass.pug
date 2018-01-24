@@ -6,9 +6,9 @@ block content
 
     div.card
       div.campaign-mass-info-number
-        h3.campaign-name Great Campaign Name
+        h3.campaign-name #{campaign.name}
       div.card-container
-        form.sms-mass-form(action="/campaigns/sms/mass", method="POST")
+        form.sms-mass-form(action=`/campaigns/${campaign.id}/sms/mass`, method="POST")
           textarea.sms-mass-textarea(name="sms_mass", maxlength="1600", placeholder="Type your message here.", required)
           button(type="submit" class="send-mass-sms")
             i(class="fa fa-bullhorn" aria-hidden="true")
