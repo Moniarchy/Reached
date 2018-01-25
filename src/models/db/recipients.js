@@ -12,7 +12,7 @@ const create = (phoneNumber, campaignId) => {
       SELECT * FROM campaigns
       JOIN recipients
       ON campaigns.id = recipients.campaign_id
-      WHERE recipient.campaign_id = $1
+      WHERE recipients.campaign_id = $1
     `, [recipient.campaign_id])
   })
   .catch(error => {
