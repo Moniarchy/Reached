@@ -70,20 +70,21 @@ router.post('/sms/auto', (request, response) => {
 
   Campaigns.getByPhoneNumber(phoneNumber)
   .then(campaign => {
-      console.log('getByPhoneNumber() campaign::::', campaign);
     Recipients.create(incomingNumber, campaign.id)
-    .then(campaign => {
-      console.log('create() campaign::::', campaign);
-      response.send(`
-        <Response>
+    .then(recipient => {
+      Campaigns.getById(recipient.campaign_id)
+      .then(campaign => {
+        response.send(`
+          <Response>
           <Message>
-            Hello ${incomingNumber}!
-            ${campaign.autoresponse}
+          Hello ${incomingNumber}!
+          ${campaign.auto_response}
           </Message>
-        </Response>
-      `);
+          </Response>
+          `);
+        })
+      })
     })
-  })
   .catch(error => {
     renderError(request, response, error);
   });

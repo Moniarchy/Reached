@@ -7,14 +7,6 @@ const create = (phoneNumber, campaignId) => {
     RETURNING *
     `,
     [ phoneNumber, campaignId])
-  .then(recipient => {
-    return db.one(`
-      SELECT campaigns.auto_response AS autoResponse FROM campaigns
-      JOIN recipients
-      ON campaigns.id = recipients.campaign_id
-      WHERE recipients.campaign_id = $1
-    `, [recipient.campaign_id])
-  })
   .catch(error => {
     console.error(error.message)
     throw error
