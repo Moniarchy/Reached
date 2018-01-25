@@ -9,7 +9,7 @@ const create = (phoneNumber, campaignId) => {
     [ phoneNumber, campaignId])
   .then(recipient => {
     return db.one(`
-      SELECT * FROM campaigns
+      SELECT campaigns.auto_response AS autoResponse FROM campaigns
       JOIN recipients
       ON campaigns.id = recipients.campaign_id
       WHERE recipients.campaign_id = $1

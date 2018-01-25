@@ -77,7 +77,7 @@ router.post('/sms/auto', (request, response) => {
       <Response>
         <Message>
           Hello ${incomingNumber}!
-          ${campaign.auto_response}
+          ${campaign.autoresponse}
         </Message>
       </Response>
     `);
