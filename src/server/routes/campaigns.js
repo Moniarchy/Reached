@@ -70,8 +70,10 @@ router.post('/sms/auto', (request, response) => {
 
   Campaigns.getByPhoneNumber(phoneNumber)
   .then(campaign => {
+      console.log('getByPhoneNumber() campaign::::', campaign);
     Recipients.create(incomingNumber, campaign.id)
     .then(campaign => {
+      console.log('create() campaign::::', campaign);
       response.send(`
         <Response>
           <Message>
