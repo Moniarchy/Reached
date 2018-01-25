@@ -71,16 +71,16 @@ router.post('/sms/auto', (request, response) => {
   Campaigns.getByPhoneNumber(phoneNumber)
   .then(campaign => {
     Recipients.create(incomingNumber, campaign.id)
-  })
-  .then(campaign => {
-    response.send(`
-      <Response>
-        <Message>
-          Hello ${incomingNumber}!
-          ${campaign.autoresponse}
-        </Message>
-      </Response>
-    `);
+    .then(campaign => {
+      response.send(`
+        <Response>
+          <Message>
+            Hello ${incomingNumber}!
+            ${campaign.autoresponse}
+          </Message>
+        </Response>
+      `);
+    })
   })
   .catch(error => {
     renderError(request, response, error);
