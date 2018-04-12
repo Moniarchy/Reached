@@ -71,7 +71,8 @@ button {
 
 .logo {
   height: 80px;
-  margin-right: 1000px;
+  margin-left: -600px;
+  padding: 5px;
 }
 
 .errors {
