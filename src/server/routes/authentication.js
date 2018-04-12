@@ -24,6 +24,7 @@ router.post('/signup', (request, response) => {
 });
 
 router.get('/connectTwilio', (request, response) => {
+  response.locals.isLoggedIn = false;
   response.render('twilio');
 });
 
