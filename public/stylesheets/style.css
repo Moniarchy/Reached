@@ -71,7 +71,8 @@ button {
 
 .logo {
   height: 80px;
-  margin-right: 1000px;
+  margin-left: -600px;
+  padding: 5px;
 }
 
 .errors {
@@ -162,6 +163,9 @@ button {
   font-size: 16px;
   margin-top: 18px;
   width: 238px;
+  padding: 10px;
+  padding-bottom: 40px;
+  padding-right: 42px;
 }
 
 .fa-bullhorn {
